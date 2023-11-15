@@ -1,0 +1,63 @@
+@use 'styles/placeholders' as *;
+@use 'styles/mixins' as *;
+@use 'styles/colors' as *;
+
+.scrollable {
+  position: fixed;
+  bottom: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  background: var(--primary-darkest);
+
+  @media (min-width: 768px) {
+    overflow-x: hidden;
+    padding: 0.25rem;
+    display: flex;
+  }
+}
+
+.scrollbar {
+  pointer-events: none;
+  position: fixed;
+  width: 100%;
+  max-width: 1440px;
+  bottom: 0;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+
+  .scrollRight,
+  .scrollLeft {
+    pointer-events: initial;
+    position: absolute;
+    height: 100%;
+    width: 3rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 150ms;
+  }
+
+  .scrollLeft {
+    left: 0;
+    padding-right: 1rem;
+  }
+  .scrollRight {
+    right: 0;
+    padding-left: 1rem;
+  }
+
+  button.scrollRight:disabled,
+  button.scrollLeft:disabled {
+    pointer-events: none;
+    opacity: 0;
+  }
+}

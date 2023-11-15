@@ -1,0 +1,131 @@
+@use 'styles/placeholders' as *;
+@use 'styles/mixins' as *;
+@use 'styles/colors' as *;
+
+.loadSave {
+  position: absolute;
+  pointer-events: initial;
+  z-index: 101;
+  min-height: 100%;
+  width: 100%;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  background: var(--bgHTML90);
+  @include flex(column);
+
+  .tabs {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    height: 2.5rem;
+    width: 100%;
+    display: flex;
+    background: var(--bg);
+    .tab {
+      @extend %inputBtn;
+      color: var(--fg);
+      border-radius: 0;
+      background: var(--primary-dark-half);
+      &.selected {
+        opacity: 1;
+        background: var(--primary-dark);
+      }
+    }
+  }
+}
+
+.top {
+  width: 100%;
+  max-width: 600px;
+}
+
+.notLoggedIn {
+  width: 100%;
+  padding: 1rem;
+  @include flex(column);
+
+  .sub {
+    @extend %textCenterPadding;
+  }
+
+  .loginBtn {
+    @extend %btn;
+    @extend %btnFull;
+    background: var(--primary-dark);
+    max-width: 450px;
+    @include flex;
+    color: var(--fg);
+    border: none;
+  }
+}
+
+.bottomBtn {
+  @extend %bottomBtn;
+  .btn {
+    @extend %btn;
+    width: 100%;
+  }
+}
+
+.loggedIn {
+  width: 100%;
+  margin-top: 0.5rem;
+  @include flex(row, space-evenly);
+
+  .user {
+    font-size: 0.9rem;
+  }
+
+  .online {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: var(--green);
+
+    &.error {
+      color: var(--red);
+    }
+  }
+
+  .btn {
+    @extend %btn;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    border: none;
+    background: transparent;
+    text-decoration: underline;
+  }
+}
+
+.loadSequence,
+.saveSequence,
+.top {
+  background: var(--bg);
+  border-radius: 0;
+}
+
+@media (orientation: landscape) {
+  .loadSequence,
+  .saveSequence,
+  .top {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 0 2rem;
+  }
+
+  .tabs {
+    max-width: 50%;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+
+  .bottomBtn {
+    display: flex;
+    justify-content: center;
+
+    .btn {
+      max-width: 50%;
+    }
+  }
+}

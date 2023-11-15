@@ -1,0 +1,129 @@
+@use 'styles/placeholders' as *;
+@use 'styles/mixins' as *;
+@use 'styles/colors' as *;
+
+.loadSequence {
+  @extend %full;
+  max-width: 600px;
+  padding: 1rem 0.5rem;
+
+  .userSequences,
+  .defaultSequences {
+    border: 1px solid var(--primary-half);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+
+    .sub {
+      padding: 1rem 0 0 1rem;
+    }
+
+    .title {
+      @extend %textCenterPadding;
+      border-bottom: 1px solid var(--primary-half);
+    }
+
+    .sync,
+    .bpm {
+      justify-self: center;
+    }
+    .delete {
+      justify-self: end;
+    }
+
+    .defaultColumnTitles {
+      width: 100%;
+      margin: 0.25rem auto;
+      max-width: 90%;
+      padding: 0.5rem;
+      display: grid;
+      grid-template-columns: 1fr 0.75fr 0.5fr 0.5fr;
+      align-items: center;
+      border-right: none !important;
+      border-left: none !important;
+    }
+
+    .defaultSequence {
+      grid-template-columns: 1fr 0.75fr 0.5fr 0.5fr;
+    }
+
+    .userColumnTitles {
+      width: 100%;
+      margin: 0.25rem auto;
+      max-width: 90%;
+      padding: 0.5rem;
+      display: grid;
+      grid-template-columns: 1fr 0.75fr 0.5fr 0.5fr;
+      justify-items: start;
+      border-right: none !important;
+      border-left: none !important;
+    }
+
+    .userSequence {
+      grid-template-columns: 1fr 0.75fr 0.5fr 0.5fr;
+
+      &.deleting {
+        opacity: 0.5;
+      }
+
+      .icon {
+        max-height: 1.75rem;
+        max-width: 1.75rem;
+
+        &.check {
+          fill: var(--green);
+          max-height: 1rem;
+        }
+
+        &.cloud {
+          &.fetching {
+            animation: flashing 400ms alternate infinite;
+          }
+          &.unavailable {
+            opacity: 0.25;
+          }
+        }
+      }
+
+      .delete,
+      .sync {
+        background: transparent;
+        outline: none;
+        border: none;
+      }
+    }
+
+    .defaultSequence,
+    .userSequence {
+      @extend %btnFull;
+      background: var(--primary-dark);
+      display: grid;
+      align-items: center;
+      margin: 0.25rem auto;
+      max-width: 90%;
+      transform: scale(1);
+
+      &.selected {
+        background: var(--green-dark);
+      }
+
+      &.fetching {
+        background: var(--green-dark);
+        animation: flashing 400ms alternate infinite;
+      }
+    }
+
+    .confirm-delete {
+      width: 100%;
+      padding: 0.5rem;
+      @include flex(row, space-evenly);
+      background: var(--primary-dark);
+
+      .btn {
+        @extend %btn;
+        &.red {
+          background: var(--red);
+        }
+      }
+    }
+  }
+}

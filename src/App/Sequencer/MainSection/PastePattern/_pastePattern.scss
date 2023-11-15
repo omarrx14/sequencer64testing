@@ -1,0 +1,71 @@
+@use 'styles/placeholders' as *;
+@use 'styles/mixins' as *;
+@use 'styles/colors' as *;
+
+.pastePattern {
+  @extend %full;
+  pointer-events: initial;
+  background: var(--bgHTML90);
+  .samples {
+    position: relative;
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0.25rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.2rem;
+
+    .sample {
+      position: relative;
+      background: none;
+      border: 1px solid var(--primary-half);
+      @include flex;
+
+      @media (hover: hover) {
+        &:hover {
+          border-color: var(--fg);
+        }
+      }
+
+      &.flashing {
+        animation: flashing 450ms alternate infinite;
+      }
+
+      p {
+        padding: 0.5rem;
+        text-align: center;
+        background: var(--bg3q);
+        border-radius: 0.5rem;
+        z-index: 3;
+        color: var(--fg);
+      }
+
+      .icon-wrapper {
+        height: 25%;
+        width: 25%;
+        z-index: 3;
+      }
+
+      .cells {
+        @extend %noEventsLayerAbs;
+        @include grid(8, 8, 5px);
+        padding: 0.25rem;
+        opacity: 0.35;
+        transition: 500ms;
+
+        &.selected {
+          @extend %turnOn;
+        }
+
+        .cell {
+          @extend %full;
+          opacity: 0;
+
+          &.on {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

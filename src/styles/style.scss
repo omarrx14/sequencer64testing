@@ -1,0 +1,194 @@
+@use 'styles/colors' as *;
+@use 'styles/spectrum' as *;
+@use 'styles/mixins' as *;
+@use 'styles/placeholders' as *;
+@use 'styles/customSelect';
+@use 'App/StatusBar/statusBar';
+@use 'App/Sequencer/sequencer';
+@use 'App/Sequencer/LoadSave/loadSave';
+@use 'App/Sequencer/LoadSave/Load/load';
+@use 'App/Sequencer/LoadSave/Save/save';
+@use 'App/Sequencer/MainSection/Grid/grid';
+@use 'App/Sequencer/MainSection/PastePattern/pastePattern';
+@use 'App/Sequencer/MainSection/ChangeKit/changeKit';
+@use 'App/Sequencer/MainSection/Mixer/mixer';
+@use 'App/Sequencer/MainSection/Mixer/knob';
+@use 'App/Sequencer/SamplePanel/SampleBtns/sampleBtns';
+@use 'App/Sequencer/SamplePanel/EditMenu/sampleEditMenu';
+@use 'App/Sequencer/SamplePanel/Modes/sampleEditModes';
+@use 'App/Sequencer/VisualPanel/visualPanel';
+@use 'App/Sequencer/MenuBar/MenuItems/menuItems';
+@use 'App/Sequencer/MenuBar/MenuItems/Transport/transport';
+@use 'App/shared/Preparing/preparing';
+@use 'App/shared/PopupMenu/popupMenu';
+@use 'App/shared/Scrollable/scrollable';
+@use 'App/Login/loginPage';
+@use 'App/Info/infoPage';
+@use 'App/ErrorBoundary/errorBoundary';
+@use 'App/mobileConsole';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html {
+  // border: 1px solid green;
+}
+
+html,
+body {
+  @extend %fullAbs;
+  background: var(--bgHTML);
+  touch-action: pan-y;
+}
+
+body {
+  max-width: 100%;
+  max-height: 100%;
+  color: var(--fg);
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  overflow-x: hidden;
+}
+
+#root {
+  @extend %full;
+  background: var(--bgHTML);
+}
+
+.deg90 {
+  transform: rotate(90deg);
+}
+
+.deg180 {
+  transform: rotate(180deg);
+}
+
+.deg270 {
+  transform: rotate(270deg);
+}
+
+.d-none {
+  display: none !important;
+}
+
+input {
+  user-select: initial;
+}
+
+button {
+  position: relative;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border: none;
+  @media (hover: hover) {
+    cursor: pointer;
+  }
+}
+
+button.pressed::before {
+  content: '';
+  @extend %noEventsLayerAbs;
+  top: 0;
+  left: 0;
+  background: var(--grey-dim);
+}
+
+label {
+  cursor: inherit;
+  pointer-events: none;
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: initial;
+}
+
+a {
+  text-decoration: none;
+}
+
+a.disabled {
+  opacity: 0.5;
+}
+
+.icon {
+  height: 100%;
+  width: 100%;
+  fill: var(--fg);
+}
+
+.error {
+  color: var(--red);
+}
+
+.confirmation {
+  color: var(--green);
+}
+
+h1 {
+  font-weight: normal;
+}
+
+p.dim {
+  color: var(--fgQuarter);
+}
+
+p.dim-2 {
+  color: var(--fgHalf);
+}
+
+.p-left-25 {
+  padding-left: 0.25rem;
+}
+
+.fadeIn {
+  transition: 250ms;
+  opacity: 1;
+}
+
+.fadeOut {
+  transition: 250ms;
+  opacity: 0;
+}
+
+@keyframes flashing {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes flashTapBtn {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes dim-flashing {
+  0% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slicing {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

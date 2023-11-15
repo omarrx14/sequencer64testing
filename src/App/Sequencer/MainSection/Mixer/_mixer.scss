@@ -1,0 +1,102 @@
+@use 'styles/mixins' as *;
+@use 'styles/placeholders' as *;
+@use 'styles/colors' as *;
+@use 'styles/responsiveFont' as *;
+
+.mixer {
+  pointer-events: initial;
+  @extend %fullAbs;
+  background: var(--bgHTML3q);
+
+  .mixItemWrapper {
+    @extend %full;
+    padding: 0.25rem;
+
+    &.main {
+      @include grid(3, 2, 5px);
+    }
+    &.mixSamples {
+      @include grid(3, 3, 5px);
+    }
+
+    .mixItem {
+      margin: 0 auto;
+      @extend %full;
+      border: 1px solid var(--primary-half);
+      color: var(--fg);
+      @include flex(column, flex-start);
+
+      &.editing {
+        border: 1px solid var(--primary);
+        .mixItemName {
+          background: var(--primary);
+        }
+      }
+
+      font-style: italic;
+      font-weight: bold;
+      text-transform: capitalize;
+
+      .mixItemName {
+        width: 100%;
+        padding: 0.5rem;
+        justify-self: flex-start;
+        background: var(--primary-darker);
+        border-radius: 0.5rem;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .mixProperties {
+        @extend %full;
+        @include flex(column, space-evenly);
+
+        &.main {
+          flex-direction: row;
+        }
+
+        .mixItemProperty {
+          cursor: pointer;
+          @include flex(row, space-evenly);
+          padding: 0.25rem 0;
+          width: 100%;
+          border: 1px solid var(--primary-half);
+          border-left-color: transparent !important;
+          border-right-color: transparent !important;
+          @include responsiveFont(2vw, 14px, 18px);
+          background: var(--bg3q);
+
+          &.editing {
+            background: var(--primary);
+          }
+        }
+      }
+
+      .knob {
+        max-height: 50%;
+        max-width: 50%;
+      }
+
+      .reset {
+        @extend %btn;
+        border: none;
+      }
+
+      .mixItemBorder {
+        @extend %noEventsLayerAbs;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: 400ms;
+      }
+
+      &.flash,
+      &.pulse {
+        .mixItemBorder {
+          transition: none;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

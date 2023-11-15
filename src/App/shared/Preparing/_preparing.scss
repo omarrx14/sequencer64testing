@@ -1,0 +1,138 @@
+@use 'styles/placeholders' as *;
+@use 'styles/mixins' as *;
+@use 'styles/colors' as *;
+@use 'styles/spectrum' as *;
+
+#preparingPortal,
+#preparingPortalTop {
+  position: fixed;
+  z-index: 201;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background: var(--bgHTML90);
+}
+
+#preparingPortalTop {
+  display: none;
+}
+
+#preparing {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  @include flex(column, space-evenly);
+
+  .prepHeader {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+  }
+
+  .prepMsgContainer {
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+  .prepMsg {
+    text-align: center;
+    line-height: 1.5rem;
+    white-space: pre-wrap;
+    display: inline-block;
+    font-size: 1rem;
+  }
+
+  .btn {
+    @extend %btn;
+  }
+
+  .prepGrid {
+    width: 50%;
+    max-width: 300px;
+    height: 50vw;
+    max-height: 300px;
+
+    @media (orientation: landscape) {
+      width: 50vh;
+      height: 50%;
+    }
+
+    padding: 0.5rem;
+    @include grid(3, 3, 0.25rem, 1fr, 1fr);
+    border-radius: 0.5rem;
+    border: 1px solid var(--primary);
+
+    .prepCell {
+      @extend %full;
+      border-radius: 0.25rem;
+      background: var(--grey-dim);
+    }
+  }
+
+  .prepBgColor {
+    animation: colorScroll 1.5s infinite;
+    @extend %full;
+    transition: none;
+    opacity: 0;
+  }
+
+  .prepBg0 {
+    animation-delay: 1ms;
+    @extend .bg0;
+  }
+
+  .prepBg1 {
+    animation-delay: 150ms;
+    @extend .bg1;
+  }
+
+  .prepBg2 {
+    animation-delay: 300ms;
+    @extend .bg2;
+  }
+
+  .prepBg3 {
+    animation-delay: 450ms;
+    @extend .bg3;
+  }
+
+  .prepBg4 {
+    animation-delay: 600ms;
+    @extend .bg4;
+  }
+
+  .prepBg5 {
+    animation-delay: 750ms;
+    @extend .bg5;
+  }
+
+  .prepBg6 {
+    animation-delay: 900ms;
+    @extend .bg6;
+  }
+
+  .prepBg7 {
+    animation-delay: 1050ms;
+    @extend .bg7;
+  }
+
+  .prepBg8 {
+    animation-delay: 1200ms;
+    @extend .bg8;
+  }
+}
+
+@keyframes colorScroll {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,74 @@
+@use 'styles/mixins' as *;
+@use 'styles/placeholders' as *;
+@use 'styles/colors' as *;
+
+.changeKit {
+  pointer-events: initial;
+  @extend %fullAbs;
+  background: var(--bgHTML90);
+
+  .kits {
+    @extend %full;
+    @include grid(3, 3, 5px);
+    padding: 0.25rem;
+
+    .btn {
+      cursor: pointer;
+      padding: 0.5rem;
+      @extend %full;
+      @include flex(column);
+      border: 1px solid var(--primary);
+      color: var(--fg);
+      background: none;
+      font-size: 1rem;
+      transform: scale(1);
+
+      &:disabled {
+        opacity: 1;
+      }
+
+      &.selected {
+        border: 1px solid var(--fg);
+        border-width: 2px !important;
+      }
+
+      &.borderDim {
+        border: 1px solid var(--primary-half);
+      }
+
+      p,
+      .dummy,
+      .icon {
+        height: 100%;
+      }
+
+      p {
+        @include flex;
+
+        &.selected,
+        &.ready {
+          font-size: 0.8rem;
+          font-weight: normal;
+        }
+
+        &.ready {
+          opacity: 0;
+          transition: 1500ms;
+          color: var(--green);
+
+          &.show {
+            @extend %turnOn;
+            &.hide {
+              @extend %turnOff;
+            }
+          }
+        }
+      }
+
+      p.flashing,
+      .icon.flashing {
+        animation: flashing 400ms alternate infinite;
+      }
+    }
+  }
+}

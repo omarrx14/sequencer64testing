@@ -1,0 +1,103 @@
+@use 'styles/placeholders' as *;
+@use 'styles/mixins' as *;
+@use 'styles/colors' as *;
+@use 'styles/responsiveFont' as *;
+
+.visualPanel {
+  @extend %noEventsLayerAbs;
+  top: 0;
+  z-index: 0;
+  border-radius: 0;
+  background: transparent;
+  @include flex;
+
+  &.overGrid {
+    position: absolute;
+    display: none;
+
+    &.show {
+      display: flex;
+      background: var(--bgHTML3q);
+    }
+
+    .analyzer.wave,
+    .analyzer.ripple {
+      transform: rotate(-90deg);
+    }
+  }
+
+  .info {
+    @extend %fullAbs;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    opacity: 0;
+    transition: none;
+    @include flex;
+    border-radius: 0;
+
+    &.show {
+      opacity: 1;
+      transition: 1s;
+    }
+
+    .infoText {
+      @include responsiveFont(2vw, 15px, 24px);
+      opacity: 0;
+      transition: 2000ms;
+      &.show {
+        transition: none;
+        opacity: 1;
+      }
+    }
+    .countIn {
+      font-size: 60px;
+      opacity: 0;
+      transition: 900ms;
+      &.show {
+        transition: none;
+        opacity: 1;
+      }
+    }
+  }
+
+  .analyzer {
+    pointer-events: none;
+    @extend %full;
+    @include flex;
+    padding: 0;
+    border-radius: 0;
+
+    &.bg3q {
+      background: var(--bgHTML3q);
+    }
+    &.hide {
+      opacity: 0;
+    }
+  }
+
+  .freq {
+    @extend %full;
+    transition-timing-function: ease-out;
+    border-radius: 0;
+    transform: scale(1, 0) translate(0, 0);
+    transform-origin: center;
+    background: linear-gradient(var(--gradient1), var(--gradient2), var(--gradient3));
+    transition-property: opacity, transform, filter;
+    opacity: 0.15;
+
+    &.pause {
+      animation: none;
+    }
+  }
+  .analyzer.bars {
+    .freq {
+      transform-origin: bottom;
+    }
+  }
+  .analyzer.ripple {
+    .freq {
+      transform: scale(1, 1) translate(0, 0);
+    }
+  }
+}

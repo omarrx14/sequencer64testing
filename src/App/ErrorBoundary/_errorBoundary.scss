@@ -1,0 +1,26 @@
+@use 'styles/placeholders' as *;
+@use 'styles/mixins' as *;
+
+#errorHandler {
+  width: 100vw;
+  height: 100vh;
+  @include flex;
+
+  .container {
+    @extend %full;
+    max-width: 500px;
+    max-height: 500px;
+    @include flex(column);
+    background: var(--bg);
+    border: 1px solid var(--primary);
+
+    p,
+    button {
+      margin: 2rem 0;
+    }
+
+    button {
+      @extend %btn;
+    }
+  }
+}

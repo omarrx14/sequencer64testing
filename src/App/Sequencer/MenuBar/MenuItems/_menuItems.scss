@@ -1,0 +1,84 @@
+@use 'styles/placeholders' as *;
+@use 'styles/mixins' as *;
+@use 'styles/colors' as *;
+
+.menuItems {
+  @extend %full;
+  scroll-snap-align: start;
+  @include flex(row, center);
+  display: inline-flex;
+  vertical-align: top;
+  overflow: visible;
+
+  @media (min-width: 768px) {
+    flex-shrink: 1;
+    justify-content: space-evenly;
+
+    &.transport {
+      flex-shrink: 1.25;
+    }
+  }
+
+  .dummy {
+    width: 2rem;
+    text-align: center;
+    font-style: initial;
+  }
+
+  .menuBtn,
+  .menuBtnWrapper {
+    @extend %btn;
+    @include flex(column);
+    height: 100%;
+    background: transparent;
+    border: 1px solid transparent;
+  }
+
+  .menuBtnWrapper {
+    margin: 0 0.5rem;
+    padding: 0;
+  }
+
+  .menuBtn {
+    label {
+      letter-spacing: initial;
+    }
+
+    .icon {
+      max-width: 2rem;
+      min-width: 1rem;
+    }
+
+    &.menuOpen {
+      border: 1px solid var(--fg);
+    }
+
+    &.active {
+      label {
+        color: var(--green);
+      }
+      .icon {
+        fill: var(--green);
+      }
+      &.openPath,
+      &.mixerBtn {
+        border-color: var(--green);
+      }
+    }
+
+    &.active.tap {
+      border-color: var(--green);
+      animation: flashTapBtn 400ms alternate infinite;
+    }
+    &.active.tap.record {
+      background: var(--bgHTML);
+      border-color: var(--red);
+      label {
+        color: var(--red);
+      }
+      .icon {
+        fill: var(--red);
+      }
+    }
+  }
+}
